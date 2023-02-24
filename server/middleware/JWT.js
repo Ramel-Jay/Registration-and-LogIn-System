@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 
 const createToken = ( user ) => {
-    const accessToken = jwt.sign({ username: user.username, password: user.password }, "BuloyLangMalakasMarshmallow27");
+    const accessToken = jwt.sign({ username: user.username, password: user.password, avatar: user.avatar }, "BuloyLangMalakasMarshmallow27");
     return accessToken;
 };
 

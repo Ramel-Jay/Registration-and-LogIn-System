@@ -45,20 +45,18 @@ router.post("/register", ( req, res ) => {
 });
 
 
-router.get("/users", validateToken,async ( req, res ) => {
-    try{
-        const users =  await Users.findAll(); 
-        res.json(users);
-    }catch( error ){
-        res.status(404).json("Invalid to read the users");
-    }
+router.get("/dashboard", validateToken, async ( req, res ) => {
+    const username = req.user.username;
+    const avatar  = req.user.avatar;
+
+    res.json({ username, avatar })
 });
 
 router.post("/login", async ( req, res ) => {
     try {
         const { username, password } = req.body;
 
-        const user  = await Users.findOne({ username: username });
+        const user  = await Users.findOne({ where: { username: username }});
 
         //check if user already exists
         if(!user){
